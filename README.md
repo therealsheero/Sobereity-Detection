@@ -1,10 +1,10 @@
-# Sobriety Detection
+# Sobriety Detection Project
 
-This project aims to utilize machine learning techniques, particularly Natural Language Processing (NLP) and Computer Vision, to detect intoxicated individuals and address challenges associated with substance abuse. 
+This project aims to utilize machine learning techniques, particularly Natural Language Processing (NLP) and Computer Vision, to detect intoxicated individuals and address challenges associated with substance abuse.
 
-**Key Objectives:**
+## Key Objectives
 
-* **Intoxication Detection:** 
+* **Intoxication Detection:**
     * Employ NLP algorithms to analyze text data (conversations) and identify patterns indicative of intoxication.
     * Utilize OpenCV and Deep Learning for facial recognition and analysis to detect signs of intoxication.
 * **Age Estimation:**
@@ -12,17 +12,17 @@ This project aims to utilize machine learning techniques, particularly Natural L
 * **User-Friendly Interface:**
     * Develop a web interface using HTML, CSS, React, and Flask for user interaction.
 
-**Technologies:**
+## Technologies
 
-* **Python**
-* **OpenCV**
-* **NLP Libraries (e.g., NLTK, spaCy)**
-* **React**
-* **HTML**
-* **CSS**
-* **Flask**
+* Python
+* OpenCV
+* NLP Libraries (e.g., NLTK, spaCy)
+* React
+* HTML
+* CSS
+* Flask
 
-**Project Approach:**
+## Project Approach
 
 * **NLP:** Analyze text data (conversations) to identify patterns associated with intoxication.
 * **Computer Vision:**
@@ -31,7 +31,7 @@ This project aims to utilize machine learning techniques, particularly Natural L
 * **Web Development:**
     * Build a user-friendly web interface using HTML, CSS, React, and Flask for user interaction.
 
-**Team Roles:**
+## Team Roles
 
 * **Shreeya Pandey:**
     * Focus on NLP for speech and text recognition of intoxicated individuals.
@@ -43,7 +43,9 @@ This project aims to utilize machine learning techniques, particularly Natural L
     * Train machine learning models for intoxication detection.
     * Develop the backend of the web interface for real-time updates.
 
-**Note:** This is a basic framework. You can further enhance this README.md file by:
+## Note
+
+This is a basic framework. You can further enhance this README.md file by:
 
 * Adding specific details about the NLP algorithms and machine learning models used.
 * Including a project timeline or roadmap.
