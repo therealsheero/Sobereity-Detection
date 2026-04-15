@@ -96,19 +96,16 @@ while True:
         ageNet.setInput(blob)
         agePred = ageNet.forward()
 
-        # Get the predicted age category index
         age_index = agePred[0].argmax()
 
-        # Get the corresponding age category (range)
         age_category = ageList[age_index]
 
         label = "{},{}".format(gender, age_category)
 
-        # Check if predicted age is below 18
         if age_category.startswith('(0') or age_category.startswith('(4') or age_category.startswith('(8') or age_category.startswith('(15'):
-            box_color = (0, 0, 255)  # Red color for warning
+            box_color = (0, 0, 255)  
         else:
-            box_color = (0, 255, 0)  # Green color for normal
+            box_color = (0, 255, 0)  
 
         cv2.rectangle(frame, (bbox[0], bbox[1] - 30), (bbox[2], bbox[1]), box_color, -1)
         cv2.putText(frame, label, (bbox[0], bbox[1] - 10), cv2.FONT_HERSHEY_SIMPLEX, 0.8, (255, 255, 255), 2,
@@ -118,8 +115,6 @@ while True:
     cv2.imshow('Face Cam', frame)
     k = cv2.waitKey(1)
     if k == ord('q'):
-        break  # Break the loop only if 'q' is pressed
-
-# Release the video capture object and close all windows
+        break  
 video.release()
 cv2.destroyAllWindows()
