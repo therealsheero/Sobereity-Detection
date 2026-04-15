@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sobriety Detection</title>
-    <!-- Import TensorFlow.js and OpenCV.js -->
     <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@3.11.0/dist/tf.min.js"></script>
     <script src="https://docs.opencv.org/master/opencv.js"></script>
 </head>
@@ -13,13 +12,11 @@
     <video id="video" width="640" height="480" autoplay></video>
     <canvas id="canvas" width="640" height="480"></canvas>
     <script>
-        // Load the sobriety detection model
         async function loadModel() {
             const model = await tf.loadLayersModel('model.json');
             return model;
         }
 
-        // Load the face and eye cascade classifiers
         const faceCascade = new cv.CascadeClassifier();
         const eyeCascade = new cv.CascadeClassifier();
         faceCascade.load('haarcascade_frontalface_default.xml');
@@ -31,11 +28,8 @@
             const canvas = document.getElementById('canvas');
             const context = canvas.getContext('2d');
 
-            // Access webcam
             const stream = await navigator.mediaDevices.getUserMedia({ video: true });
             video.srcObject = stream;
-
-            // When video metadata is loaded, run detection
             video.onloadedmetadata = async () => {
                 video.play();
                 const model = await loadModel();
@@ -43,7 +37,6 @@
             };
         }
 
-        // Function to detect sobriety in each frame
         async function detectFrame(video, context, model) {
             const src = new cv.Mat(video.height, video.width, cv.CV_8UC4);
             const gray = new cv.Mat();
@@ -52,32 +45,22 @@
 
             context.drawImage(video, 0, 0, video.width, video.height);
             src.data.set(context.getImageData(0, 0, video.width, video.height).data);
-
-            // Convert frame to grayscale
             cv.cvtColor(src, gray, cv.COLOR_RGBA2GRAY, 0);
 
-            // Detect faces
             faceCascade.detectMultiScale(gray, faces, 1.1, 3, 0);
 
             for (let i = 0; i < faces.size(); ++i) {
                 const face = faces.get(i);
                 const faceROI = gray.roi(face);
                 
-                // Detect eyes within the face region
                 eyeCascade.detectMultiScale(faceROI, eyes, 1.1, 2, 0);
-                
-                // Preprocess eye image and make prediction
                 const eye = eyes.get(0);
                 const eyeROI = faceROI.roi(eye);
                 const resizedEye = cv.resize(eyeROI, new cv.Size(224, 224));
                 const data = resizedEye.data;
                 const tensor = tf.tensor(data).reshape([1, 224, 224, 3]);
-
-                // Predict sobriety
                 const prediction = model.predict(tensor);
                 const sobriety = prediction.dataSync()[0];
-
-                // Draw rectangle around face
                 const point1 = new cv.Point(face.x, face.y);
                 const point2 = new cv.Point(face.x + face.width, face.y + face.height);
                 const color = sobriety > 0.5 ? new cv.Scalar(0, 255, 0) : new cv.Scalar(0, 0, 255);
@@ -98,7 +81,6 @@
             requestAnimationFrame(() => detectFrame(video, context, model));
         }
 
-        // Start sobriety detection when the page loads
         window.onload = () => detectSobriety();
     </script>
 </body>
