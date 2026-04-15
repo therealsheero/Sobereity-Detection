@@ -9,7 +9,7 @@
 </head>
 <body>
     <a href="home" class="home-link">
-        <i class='bx bx-home'></i> <!-- Use the Boxicons home icon -->
+        <i class='bx bx-home'></i> 
     </a>
     <div class="container">
         <h1>Sobriety Detection</h1>
@@ -23,10 +23,8 @@
         var videoFeed = document.getElementById('video-feed');
         
         if (btn.innerText === 'Start Recording') {
-            // Show video feed
             videoFeed.style.display = 'block';
             btn.innerText = 'Stop Recording';
-            // Start camera
             fetch('/control', {
                 method: 'POST',
                 headers: {
@@ -34,11 +32,8 @@
                 },
                 body: 'action=start',
             });
-        } else {
-            // Hide video feed
-            videoFeed.style.display = 'none';
+        } else {            videoFeed.style.display = 'none';
             btn.innerText = 'Start Recording';
-            // Stop camera
             fetch('/control', {
                 method: 'POST',
                 headers: {
